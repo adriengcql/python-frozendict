@@ -23,7 +23,11 @@ K = TypeVar("K")
 V = TypeVar("V", covariant=True)
 K2 = TypeVar("K2")
 V2 = TypeVar("V2", covariant=True)
-SelfT = TypeVar("SelfT", bound=frozendict[K, V])
+
+try:
+    from typing import Self as SelfT
+except ImportError:
+    SelfT = TypeVar("SelfT", bound=frozendict[K, V])
 
 # noinspection PyPep8Naming
 class frozendict(Mapping[K, V]):
